@@ -1188,7 +1188,7 @@ fn evict_stale_host_sessions(host_session: &mut Option<HostSessionState>, parked
     // environment in service.
     let live = probe.session.live_extension_registry_epoch().ok();
     let is_stale = |state: &HostSessionState| live != Some(state.session.extension_registry_epoch());
-    if !host_session.as_ref().is_some_and(&is_stale) && !parked.iter().any(&is_stale) {
+    if !host_session.as_ref().is_some_and(is_stale) && !parked.iter().any(&is_stale) {
         return;
     }
     // Clear before any drop, for the same reason the capacity eviction does: a
@@ -1198,7 +1198,7 @@ fn evict_stale_host_sessions(host_session: &mut Option<HostSessionState>, parked
         drop(state.clear_module_snapshot_cache());
     }
     parked.retain(|state| !is_stale(state));
-    if host_session.as_ref().is_some_and(&is_stale) {
+    if host_session.as_ref().is_some_and(is_stale) {
         *host_session = None;
     }
 }

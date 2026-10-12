@@ -106,6 +106,7 @@ lint_groups_priority = "warn"             # Allow lint group priority warnings
 
 # === ALLOWABLE EXCEPTIONS ===
 # These are often too pedantic for practical development
+assert_is_empty = "allow"                    # `assert!(x.is_empty())` is clearer than `assert_eq!(x, [])`
 items_after_statements = "allow"             # Allow items after statements in functions
 match_same_arms = "allow"                    # Match same arms are sometimes more clear
 missing_const_for_fn = "allow"
