@@ -9,6 +9,12 @@ The supported Lean toolchain range, Rust MSRV, and tested platforms for each rel
 
 ## [Unreleased]
 
+### Added
+
+- **Added Lean 4.35.0-rc4 to the supported toolchain window.** It ships a `lean.h` byte-identical to 4.35.0-rc3 and
+  joins that entry. The head of the window (CI matrices, sanitizer/release workflows, and committed `lean-toolchain`
+  pins) moves from 4.35.0-rc3 to 4.35.0-rc4.
+
 ## [0.9.2]
 
 ### Added

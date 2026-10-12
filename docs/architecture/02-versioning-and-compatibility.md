@@ -8,7 +8,7 @@ a compatibility commitment; bumping any of them requires a versioned proposal, n
 
 `lean-rs` supports a **contiguous window of Lean 4 stable releases**, plus the leading release candidate while it is
 being qualified, enumerated in the [`SUPPORTED_TOOLCHAINS`](../../crates/lean-rs-abi/src/supported.rs) table. The table
-is the single source of truth; this document mirrors it for narrative context. As of 2026-09-24:
+is the single source of truth; this document mirrors it for narrative context. As of 2026-10-12:
 
 | Lean versions (header-identical) | `lean.h` SHA-256 (prefix) |
 | --- | --- |
@@ -23,7 +23,7 @@ is the single source of truth; this document mirrors it for narrative context. A
 | 4.34.1 | `866d80c309a9…` |
 | 4.35.0-rc1 | `322d6bd8ab26…` |
 | 4.35.0-rc2 | `071e79d03971…` |
-| 4.35.0-rc3 | `eb951e1171d3…` |
+| 4.35.0-rc3, 4.35.0-rc4 | `eb951e1171d3…` |
 
 Digests are shown as 12-character prefixes; the full SHA-256 for each row lives in
 [`SUPPORTED_TOOLCHAINS`](../../crates/lean-rs-abi/src/supported.rs), which the build scripts hash-check against.
@@ -78,6 +78,7 @@ row was added the same day as the new head: a new digest whose only change from 
 factored into a `lean_is_unstuck_mt` inline (the same comparison), a `lean_is_never_freed` inline is added, and
 `LEAN_RC_STUCK_ST` documents where the runtime's `lean_inc_ref_huge_n` freezes an overflowing single-threaded count.
 The inline paths `lean-rs-sys` mirrors behave identically, layouts are byte-identical, and all 88 symbols resolve.
+4.35.0-rc4 joined the 4.35.0-rc3 row on 2026-10-12 as the new head (byte-identical header).
 
 **Policy.**
 

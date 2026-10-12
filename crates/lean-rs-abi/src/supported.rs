@@ -168,9 +168,10 @@ pub const SUPPORTED_TOOLCHAINS: &[SupportedToolchain] = &[
     // 4.35.0-rc2 is the refcount-helper patch 4.34.1 also carries
     // (`lean_is_unstuck_mt`, `lean_is_never_freed`, `LEAN_RC_STUCK_ST`);
     // mirrored inline behavior is unchanged, layouts are byte-identical, and
-    // all 88 REQUIRED_SYMBOLS resolve. Added 2026-09-25 as the new head.
+    // all 88 REQUIRED_SYMBOLS resolve. Added 2026-09-25 as the new head. 4.35.0-rc4
+    // ships a byte-identical header and joined on 2026-10-12 as the new head.
     SupportedToolchain {
-        versions: &["4.35.0-rc3"],
+        versions: &["4.35.0-rc3", "4.35.0-rc4"],
         header_digest: "eb951e1171d39b828e7ad60aed0b90759598b678bfe58cf85c65a1559c021bf9",
         missing_symbols: &[],
     },
