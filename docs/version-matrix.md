@@ -9,8 +9,8 @@ even if they happen to compile.
 
 ## Lean toolchain window
 
-Supported window: Lean 4.30.0–4.35.0-rc4 (twelve entries; 4.31.0-rc1/4.31.0-rc2, 4.32.0-rc1/4.32.0/4.32.2,
-4.33.0-rc1/4.33.0-rc2/4.33.0, 4.34.0-rc2/4.34.0, and 4.35.0-rc3/4.35.0-rc4 each ship a byte-identical `lean.h` and share one entry). 4.33.0-rc1 ships a new digest whose only change is two C11 `_Atomic(...)`
+Supported window: Lean 4.30.0–4.35.0 (twelve entries; 4.31.0-rc1/4.31.0-rc2, 4.32.0-rc1/4.32.0/4.32.2,
+4.33.0-rc1/4.33.0-rc2/4.33.0, 4.34.0-rc2/4.34.0, and 4.35.0-rc3/4.35.0-rc4/4.35.0 each ship a byte-identical `lean.h` and share one entry). 4.33.0-rc1 ships a new digest whose only change is two C11 `_Atomic(...)`
 field qualifiers that leave every mirrored struct byte-identical in size, alignment, and field offsets. 4.34.0-rc1
 ships a new digest whose only change is TSan-instrumented refcount inlines (`lean_internal_*_rc` helpers) with no
 struct layout change. 4.33.1 backports that same TSan instrumentation (plus sticky-rc comments) with no struct
