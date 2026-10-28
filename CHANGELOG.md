@@ -9,6 +9,12 @@ The supported Lean toolchain range, Rust MSRV, and tested platforms for each rel
 
 ## [Unreleased]
 
+### Fork (jakeryderv/lean-rs, `v0.9.4+neumera.1`)
+
+- `lean-rs-sys` build script: `ELAN_TOOLCHAIN` is a rerun input, and the resolved prefix, Lean version, and
+  `lean.h` digest are emitted as `cargo:` metadata (`DEP_LEANSHARED_PREFIX`, `DEP_LEANSHARED_LEAN_VERSION`,
+  `DEP_LEANSHARED_HEADER_DIGEST`) for dependents' build scripts. Not submitted upstream.
+
 ## [0.9.4]
 
 ### Added

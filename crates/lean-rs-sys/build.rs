@@ -13,7 +13,14 @@
 //! 4. Emit `cargo:rustc-link-search` / `rustc-link-lib` directives for the
 //!    selected feature combination (`static` vs `dynamic`, with or without
 //!    `mimalloc`).
-//! 5. Emit `cargo:rerun-if-*` for the discovery inputs.
+//! 5. Emit `cargo:prefix`, `cargo:lean_version`, and `cargo:header_digest`
+//!    metadata. Because this crate declares `links = "leanshared"`, Cargo
+//!    exposes these to dependents' build scripts as `DEP_LEANSHARED_PREFIX`,
+//!    `DEP_LEANSHARED_LEAN_VERSION`, and `DEP_LEANSHARED_HEADER_DIGEST`, so a
+//!    dependent that also builds Lean code (for example with Lake) can check
+//!    that both halves resolved the same toolchain.
+//! 6. Emit `cargo:rerun-if-*` for the discovery inputs, including
+//!    `ELAN_TOOLCHAIN`, which changes what `lean --print-prefix` resolves to.
 
 // Build scripts panic to abort the build with a diagnostic—that is the
 // correct failure mode here, not a smell.
@@ -76,9 +83,19 @@ fn main() {
     println!("cargo:rustc-env=LEAN_HEADER_DIGEST={actual_digest}");
     emit_version_cfgs(resolved_version);
 
+    // Metadata for dependents (`DEP_LEANSHARED_*` in their build scripts).
+    println!("cargo:prefix={}", prefix.display());
+    println!("cargo:lean_version={discovered_version}");
+    println!("cargo:header_digest={actual_digest}");
+
     emit_link_directives(&prefix);
 
     println!("cargo:rerun-if-env-changed=LEAN_SYSROOT");
+    // elan's proxies honor `ELAN_TOOLCHAIN`, so it changes which toolchain
+    // `lean --print-prefix` resolves; without this, a dependent that pins its
+    // toolchain through that variable would keep stale bindings in a reused
+    // target directory after changing the pin.
+    println!("cargo:rerun-if-env-changed=ELAN_TOOLCHAIN");
     println!("cargo:rerun-if-env-changed=ELAN_HOME");
     println!("cargo:rerun-if-env-changed=PATH");
     println!("cargo:rerun-if-changed={}", header_path.display());
